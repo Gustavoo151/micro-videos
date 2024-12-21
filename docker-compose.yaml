@@ -1,8 +1,0 @@
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: micro-videos-typescript-app
-    volumes:
-      - .:/home/node/app
