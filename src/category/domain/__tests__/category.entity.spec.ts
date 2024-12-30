@@ -94,7 +94,7 @@ describe('Category Unit  Tests', () => {
         });
         
         test("shold active a category", () => {
-            const category = Category.create({
+            const category = Category.create({ 
                 name: "Movie",
                 is_active: false
             });
