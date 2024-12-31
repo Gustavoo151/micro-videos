@@ -1,3 +1,4 @@
+import { Uuid } from "../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity"
 
 describe('Category Unit  Tests', () => {
@@ -6,7 +7,7 @@ describe('Category Unit  Tests', () => {
             let category  = new Category({
                 name: 'Movie',
             });
-            expect(category.category_id).toBeUndefined();
+            expect(category.category_id).toBeInstanceOf(Uuid);
             expect(category.name).toBe('Movie');
             expect(category.description).toBeNull();
             expect(category.is_active).toBeTruthy();
@@ -44,7 +45,7 @@ describe('Category Unit  Tests', () => {
             const category = new Category({
                 name: "Movie"
             });
-            expect(category.category_id).toBeUndefined();
+            expect(category.category_id).toBeInstanceOf(Uuid);
             expect(category.name).toBe('Movie');
             expect(category.description).toBeNull();
             expect(category.is_active).toBeTruthy();
@@ -56,7 +57,7 @@ describe('Category Unit  Tests', () => {
                 name: "Movie",
                 description: "some description"
             });
-            expect(category.category_id).toBeUndefined();
+            expect(category.category_id).toBeInstanceOf(Uuid);
             expect(category.name).toBe('Movie');
             expect(category.description).toBe("some description");
             expect(category.is_active).toBeTruthy();
@@ -68,7 +69,7 @@ describe('Category Unit  Tests', () => {
                 name: "Movie",
                 is_active: false
             });
-            expect(cateogory.category_id).toBeUndefined();
+            expect(cateogory.category_id).toBeInstanceOf(Uuid);
             expect(cateogory.name).toBe("Movie");
             expect(cateogory.description).toBeNull();
             expect(cateogory.is_active).toBeFalsy();
