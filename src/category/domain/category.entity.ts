@@ -33,7 +33,9 @@ export class Category {
 
     // (Esse create a um factory metodo)
     static create(props: CategoryCreateCommand): Category {
-        return new Category(props);
+        const category = new Category(props);
+        Category.validate(category);
+        return category;
     } 
 
     update(props: Partial<CategoryConstructorProps>): Category {
@@ -42,10 +44,12 @@ export class Category {
 
     changeName(name: string): void {
         this.name = name;
+        Category.validate(this);
     }
 
     changeDescription(description: string): void {
         this.description = description;
+        Category.validate(this);
     }
 
     activate(){

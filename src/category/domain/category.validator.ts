@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, MaxLength, validateSync } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsOptional, IsString, MaxLength} from "class-validator";
 import { Category } from "./category.entity";
 import { ClassValidatorFields } from "../../shared/domain/validators/class-validator-fields";
 
@@ -21,9 +21,9 @@ export class CategoryRules{
     }
 }
 
-class CategoryValidator extends ClassValidatorFields<CategoryRules>{
+export class CategoryValidator extends ClassValidatorFields<CategoryRules>{
     validate(entity: Category){
-        return super.validate(new CategoryRules(entity))
+        return super.validate(new CategoryRules(entity));
     }
 }
 

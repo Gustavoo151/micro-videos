@@ -2,6 +2,11 @@ import { Uuid } from "../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity"
 
 describe('Category Unit  Tests', () => {
+    let validateSpy: any;
+    beforeEach(() => {
+        validateSpy = jest.spyOn(Category, "validate");
+    });
+
     describe("constructor", () =>{
         test('should create a category with default values', () => {
             let category  = new Category({
@@ -42,7 +47,7 @@ describe('Category Unit  Tests', () => {
 
     describe("create command", () => {
         test("shold create a category", () => {
-            const category = new Category({
+            const category = Category.create({
                 name: "Movie"
             });
             expect(category.category_id).toBeInstanceOf(Uuid);
@@ -50,10 +55,11 @@ describe('Category Unit  Tests', () => {
             expect(category.description).toBeNull();
             expect(category.is_active).toBeTruthy();
             expect(category.created_at).toBeInstanceOf(Date);
+            expect(validateSpy).toHaveBeenCalledTimes(1);
         });
        
         test("shold create a category with description", () => {
-            const category = new Category({
+            const category = Category.create({
                 name: "Movie",
                 description: "some description"
             });
@@ -62,10 +68,11 @@ describe('Category Unit  Tests', () => {
             expect(category.description).toBe("some description");
             expect(category.is_active).toBeTruthy();
             expect(category.created_at).toBeInstanceOf(Date);
+            expect(validateSpy).toHaveBeenCalledTimes(1);
         });
 
         test("should create a category with is_active", () => {
-            const cateogory = new Category({
+            const cateogory = Category.create({
                 name: "Movie",
                 is_active: false
             });
@@ -74,6 +81,7 @@ describe('Category Unit  Tests', () => {
             expect(cateogory.description).toBeNull();
             expect(cateogory.is_active).toBeFalsy();
             expect(cateogory.created_at).toBeInstanceOf(Date); 
+            expect(validateSpy).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -99,6 +107,7 @@ describe('Category Unit  Tests', () => {
             });
             category.changeName("other name");
             expect(category.name).toBe("other name");   
+            expect(validateSpy).toHaveBeenCalledTimes(2);
         });
         
         test("should change description", () => {
@@ -107,6 +116,7 @@ describe('Category Unit  Tests', () => {
             });
             category.changeDescription("Some description");
             expect(category.description).toBe("Some description");
+            expect(validateSpy).toHaveBeenCalledTimes(2);
         });
         
         test("shold active a category", () => {
@@ -116,6 +126,7 @@ describe('Category Unit  Tests', () => {
             });
             category.is_active = true;
             expect(category.is_active).toBeTruthy();
+            expect(validateSpy).toHaveBeenCalledTimes(1);
         });
 
         test("should disable a category", () => {
@@ -125,6 +136,7 @@ describe('Category Unit  Tests', () => {
             });
             category.deactivate();
             expect(category.is_active).toBeFalsy();
+            expect(validateSpy).toHaveBeenCalledTimes(1);
         })
     });
 })
