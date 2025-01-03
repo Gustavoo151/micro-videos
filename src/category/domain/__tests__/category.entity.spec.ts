@@ -73,7 +73,22 @@ describe('Category Unit  Tests', () => {
             expect(cateogory.name).toBe("Movie");
             expect(cateogory.description).toBeNull();
             expect(cateogory.is_active).toBeFalsy();
-            expect(cateogory.created_at).toBeInstanceOf(Date);
+            expect(cateogory.created_at).toBeInstanceOf(Date); 
+        });
+    });
+
+
+    describe('category_id field', () => {
+        const arrange = [{category_id: null}, {id: undefined}, {id: new Uuid()}]
+        test.each(arrange)('id = %j', ({category_id}) => {
+            const category = new Category({
+                name: 'Movie',
+                category_id: category_id as any,
+            });
+            expect(category.category_id).toBeInstanceOf(Uuid);
+            if(category_id as any instanceof Uuid){ // Remover as any
+                expect(category.category_id).toBe(category_id);
+            }
         });
     });
 
