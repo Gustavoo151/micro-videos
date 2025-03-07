@@ -2,7 +2,7 @@ import { ValueObject } from "../value-object";
 import {v4 as uuidv4, validate as uuidValidate} from "uuid";
 
 export class Uuid extends ValueObject {
-    readonly id: string;
+    readonly id: string; // Esse readOnly ser para deixar esse campo para apenas "leitura"
     
     constructor(id?: string){
         super();
