@@ -3,7 +3,7 @@ import { Category } from "../category.entity";
 
 describe("Category Unit  Tests", () => {
   let validateSpy: any;
-  beforeEach(() => {
+  beforeEach(() => {  // Aqui eu quero que ele resete os dados do mock a cada teste
     validateSpy = jest.spyOn(Category, "validate");
   });
 
@@ -55,7 +55,7 @@ describe("Category Unit  Tests", () => {
       expect(category.description).toBeNull();
       expect(category.is_active).toBeTruthy();
       expect(category.created_at).toBeInstanceOf(Date);
-      expect(validateSpy).toHaveBeenCalledTimes(1);
+      expect(validateSpy).toHaveBeenCalledTimes(1);  // Verificando o validate foi realemente chamado dentro da entity category
     });
 
     test("shold create a category with description", () => {
