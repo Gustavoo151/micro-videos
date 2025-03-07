@@ -6,6 +6,7 @@ export abstract class ValueObject{
             return false;
         }
         
+        // Aqui eu comparo se o nome das duas classe são iguais
         if(vo.constructor.name !== this.constructor.name){
             return false;
         }
