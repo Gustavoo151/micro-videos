@@ -1,11 +1,13 @@
 import { ValueObject } from "../domain/value-object";
 
+// Exemplo de objeto de valor
 class StringValueObject extends ValueObject{
     constructor(readonly value: string){
         super();
     }
 }
 
+// Exemplo de objeto de valor mais complexo
 class ComplexValueObject extends ValueObject {
     constructor(readonly props1: String, readonly props2: number){
         super();
@@ -42,6 +44,5 @@ describe("Value Object Unit Tests", () => {
         const complexValueObject2 = new ComplexValueObject("test", 2);
         expect(complexValueObject1.equals(complexValueObject2)).toBeFalsy();
     })
-
 
 });
