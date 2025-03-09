@@ -24,7 +24,7 @@ expect.extend({
       } catch (e) {
         // Se lançou exceção, verifica se contém as mensagens de erro esperadas
         const error = e as EntityValidationError;
-        return assertContainsErrosMessages(error.error, received);
+        return assertContainsErrorsMessages(error.error, received);
       }
     } else {
       // Caso 2: expected é um objeto com validator e data
@@ -35,18 +35,18 @@ expect.extend({
         return isValid(); // Se validação passou, o teste passa
       }
       // Retorna o resultado da validação falha
-      return assertContainsErrosMessages(validator.errors, received);
+      return assertContainsErrorsMessages(validator.errors, received);
     }
   },
 });
 
 // Função auxiliar que verifica se os erros esperados estão contidos nos erros recebidos
-function assertContainsErrosMessages(expected: FieldsErrors, received: FieldsErrors) {
+function assertContainsErrorsMessages(expected: FieldsErrors, received: FieldsErrors) {
   // Usa o matcher objectContaining para verificar correspondência parcial
   const isMatch = expect.objectContaining(received).asymmetricMatch(expected);
 
   return isMatch
-    ? { pass: true, message: () => '' } // Se corresponde, o teste passa
+    ? isValid()
     : {
         // Se não corresponde, o teste falha com mensagem explicativa
         pass: false,
