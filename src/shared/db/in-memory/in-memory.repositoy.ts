@@ -16,7 +16,7 @@ export abstract class InMemoryRepository<E extends Entity, EntityId extends Valu
   async update(entity: E): Promise<void> {
     const indexFound = this.items.findIndex(item => item.entity_id.equals(entity.entity_id));
     if (indexFound === -1) {
-      throw new Error('Entity not foud');
+      throw new Error('Entity not found');
     }
     this.items[indexFound] = entity;
   }
@@ -25,12 +25,12 @@ export abstract class InMemoryRepository<E extends Entity, EntityId extends Valu
     const indexFound = this.items.findIndex(item => item.entity_id.equals(entity_id));
 
     if (indexFound === -1) {
-      throw new Error('Entity not foud');
+      throw new Error('Entity not found');
     }
     this.items.splice(indexFound, 1);
   }
 
-  async findById(entity_id: EntityId): Promise<E> {
+  async findById(entity_id: EntityId): Promise<E | null> {
     const item = this.items.find(item => item.entity_id.equals(entity_id));
     return typeof item === 'undefined' ? null : item;
   }
